@@ -1,17 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchPokemonList } from "../../services/PokemonService";
 import { PokemonCard } from "./PokemonCard";
-import { Pokemon } from "../../types/Pokemon";
+import { Pokemon, PokemonAPI } from "../../types/Pokemon";
 
-function PokemonList() {
+interface PokemonListProps{
+    pokemonList: PokemonAPI[] | undefined
+}
 
-    const { data: pokemonList, isLoading, isError } = useQuery({
-        queryKey: ["pokemons"],
-        queryFn: fetchPokemonList
-    });
-
-    if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error fetching data</div>;
+function PokemonList( { pokemonList }:PokemonListProps ) {
 
     return (
         <div className="pokemon_list">

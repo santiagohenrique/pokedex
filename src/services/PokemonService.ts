@@ -1,15 +1,23 @@
 import axios from "axios";
 import { PokemonDetails } from "../types/Pokemon";
-
 import { PokemonAPI } from "../types/Pokemon";
 
-export async function fetchPokemonList(): Promise<PokemonAPI[]> {
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon');
+interface APIData{
+    previous: string,
+    next: string,
+    pokemonList: PokemonAPI[]
+}
+
+export async function fetchPokemonList(url: string): Promise<APIData> {
+    const response = await axios.get(url);
     const modifiedResults = await Promise.all(response.data.results.map(async (pokemon: PokemonAPI) => {
         return fetchPokemonDetails(pokemon);
     }));
-    console.log(modifiedResults)
-    return modifiedResults;
+    return {
+        previous: response.data.previous,
+        next: response.data.next,
+        pokemonList: modifiedResults
+    }
 }
 
 async function fetchPokemonDetails(pokemon: PokemonAPI): Promise<PokemonAPI> {
