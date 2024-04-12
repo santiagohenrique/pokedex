@@ -3,10 +3,13 @@ import './assets/scss/style.scss'
 import PokemonList from "./components/pokemon/PokemonList"
 import { fetchPokemonList } from './services/PokemonService';
 import { useState } from 'react';
+import pokemonLogo from './assets/svgs/pokemon_logo.svg'
+import { ModalFilter } from './components/ModalFilter';
 
 function App() {
 
   const [pokemonUrl, setPokemonUrl] = useState('https://pokeapi.co/api/v2/pokemon?offset=0&limit=24');
+  const [modalVisibility, setModalVisibility] = useState(false)
 
   const { data: pokemonData, isLoading, isError } = useQuery({
     queryKey: ["pokemons", pokemonUrl],
@@ -29,8 +32,17 @@ function App() {
   if (isError) return <div>Error fetching data</div>;
   
   return (
-    <div>
-      <h1>List of Pokemons</h1>
+    <>
+      <header id="header">
+        <div className="container">
+          <div className="logo_container">
+            <img src={pokemonLogo} alt="" />
+          </div>
+          <button onClick={() => { setModalVisibility(!modalVisibility) }} className="btn_filter">
+            Busca avançada
+          </button>
+        </div>
+      </header>
       <div className="container">
         <PokemonList pokemonList={pokemonData?.pokemonList} />
         <div className="buttons_container">
@@ -42,13 +54,16 @@ function App() {
           {
             pokemonData?.next &&
             <button className="btn_next" onClick={handleNext}>
-              Próxima &gt;
+              Próximo &gt;
             </button>
           }
         </div>
       </div>
-
-    </div>
+      {modalVisibility &&
+        <ModalFilter setModalVisibility={setModalVisibility} />
+      }
+      
+    </>
   )
 
 }
