@@ -1,0 +1,47 @@
+.pokemon_list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    .pokemon_card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        cursor: pointer;
+        padding: 1rem;
+
+        .pokemon_name {
+            font-size: 2rem;
+            margin-top: 5px;
+        }
+
+        .pokemon_image {
+            display: flex;
+            overflow: hidden;
+            img {
+                width: 75%;
+                margin: auto;
+            }
+        }
+
+        .pokemon_types {
+            list-style: none;
+            padding: 0;
+            margin: 5px 0;
+            font-size: 1.6rem;
+            li {
+                display: inline-block;
+                padding: 2px 8px;
+                border-radius: 4px;
+                background-color: #eee;
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+@media (min-width: 768px){
+    .pokemon_list{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

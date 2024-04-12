@@ -2,7 +2,7 @@ import axios from "axios";
 import { PokemonDetails } from "../types/Pokemon";
 import { PokemonAPI } from "../types/Pokemon";
 
-interface APIData{
+export interface APIData{
     previous: string,
     next: string,
     pokemonList: PokemonAPI[]

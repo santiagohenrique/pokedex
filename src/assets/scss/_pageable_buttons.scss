@@ -1,0 +1,26 @@
+.buttons_container {
+    position: relative;
+
+    button {
+        color: #fff;
+        border-radius: 0.3rem;
+        padding: 0.5rem 0.5rem;
+        font-size: 1.6rem;
+    }
+
+    @mixin btn_style($background-color) {
+        background-color: $background-color;
+    }
+
+    .btn_previous {
+        position: absolute;
+        left: 0;
+        @include btn_style(#ac0000)
+    }
+
+    .btn_next {
+        position: absolute;
+        right: 0;
+        @include btn_style(#009900)
+    }
+}
