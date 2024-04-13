@@ -34,7 +34,16 @@ function App() {
     setModalVisibility(!modalVisibility)
   }
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading){
+    return (
+      <div className="loading_container">
+        <div className="mainball">
+          <div className="pokebutton"></div>
+        </div>
+      </div>
+    )
+  } 
+
   if (isError) return <div>Error fetching data</div>;
   
   return (
@@ -47,7 +56,6 @@ function App() {
       {modalVisibility &&
         <ModalFilter handleModalVisibility={handleModalVisibility} />
       }
-      
     </>
   )
 

@@ -10,7 +10,7 @@ function PokemonList( { pokemonList }:PokemonListProps ) {
     return (
         <div className="pokemon_list">
             {pokemonList?.map((pokemon: Pokemon) => (
-                <PokemonCard name={ pokemon.name } image={pokemon.image} types={pokemon.types}  />
+                <PokemonCard id={pokemon.id} name={ pokemon.name } image={pokemon.image} types={pokemon.types} key={pokemon.name}  />
             ))}
         </div>
     );

@@ -4,7 +4,7 @@ interface HeaderProps{
     handleModalVisibility: () => void;
 }
 
-export const Header = ( { handleModalVisibility }:HeaderProps ) => {
+export const Header = ( { handleModalVisibility }: HeaderProps ) => {
     return(
         <header id="header">
         <div className="container">

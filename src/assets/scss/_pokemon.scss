@@ -1,14 +1,29 @@
+@import 'variables';
+
+@mixin grid-columns($columns) {
+    display: -ms-grid;
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+}
+
 .pokemon_list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    @include grid-columns(2);
     gap: 1rem;
     margin-bottom: 1rem;
 
     .pokemon_card {
         border: 1px solid #ccc;
+        box-shadow: 0px 1px 3px 0px #000;
         border-radius: 8px;
         cursor: pointer;
         padding: 1rem;
+
+        .pokemon_id{
+            color: #818181;
+            font-style: italic;
+            font-size: 1.6rem;
+        }
 
         .pokemon_name {
             font-size: 2rem;
@@ -31,10 +46,87 @@
             font-size: 1.6rem;
             li {
                 display: inline-block;
-                padding: 2px 8px;
+                padding: 5px 10px;
                 border-radius: 4px;
-                background-color: #eee;
                 margin-right: 5px;
+
+                &.grass{
+                    background-color: $color-grass;
+                }
+
+                &.fire{
+                    background-color: $color-fire;
+                    color: #fff;
+                }
+
+                &.poison{
+                    background: $color-poison;
+                }
+
+                &.water{
+                    background-color: $color-water;
+                    color: #fff;
+                }
+
+                &.ice{
+                    background-color: $color-ice;
+                }
+
+                &.normal{
+                    background-color: $color-normal;
+                }
+
+                &.bug{
+                    background-color: $color-bug;
+                }
+
+                &.ground{
+                    background: linear-gradient(125deg, #fcfc5a, #daa638);
+                }
+
+                &.electric{
+                    background-color: $color-electric;
+                }
+
+                &.fairy{
+                    background-color: $color-fairy;
+                }
+
+                &.psychic{
+                    background-color: $color-psychic;
+                }
+
+                &.rock{
+                    background-color: $color-rock;
+                }
+
+                &.steel{
+                    background-color: $color-steel;
+                }
+
+                &.flying{
+                    background: linear-gradient(125deg, #d8d8d8, #3c91d6);
+                }
+
+                &.dragon{
+                    background: linear-gradient(125deg, #fc7f94, #3c91d6);
+                    color: #fff;
+                }
+
+                &.fighting{
+                    background-color: #ffc547;
+                }
+
+                &.ghost{
+                    background-color: #6d016d;
+                    color: #fff;
+                }
+
+                &.dark{
+                    background-color: #646262;
+                    color: #fff;
+                }
+
             }
         }
     }
@@ -42,6 +134,18 @@
 
 @media (min-width: 768px){
     .pokemon_list{
-        grid-template-columns: repeat(3, 1fr);
+        @include grid-columns(3);
+    }
+}
+
+@media (min-width: 992px){
+    .pokemon_list{
+        @include grid-columns(5);
+    }
+}
+
+@media (min-width: 1200px){
+    .pokemon_list{
+        @include grid-columns(6);
     }
 }
