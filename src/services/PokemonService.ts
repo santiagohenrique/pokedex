@@ -14,7 +14,6 @@ export async function fetchPokemonList(url: string): Promise<APIData> {
     const modifiedResults = await Promise.all(response.data.results.map(async (pokemon: PokemonAPI) => {
         return fetchPokemonDetails(pokemon);
     }));
-    console.log(modifiedResults)
     return {
         previous: response.data.previous,
         next: response.data.next,
@@ -31,9 +30,10 @@ async function fetchPokemonDetails(pokemon: PokemonAPI): Promise<PokemonAPI> {
         ...pokemon,
         id: id,
         image: image,
-        types: types
+        types: types,
     };
 }
+
 
 function extractPokemonId(url: string): string {
     const parts = url.split('/');

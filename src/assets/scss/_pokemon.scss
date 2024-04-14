@@ -19,12 +19,6 @@
         cursor: pointer;
         padding: 1rem;
 
-        .pokemon_id{
-            color: #818181;
-            font-style: italic;
-            font-size: 1.6rem;
-        }
-
         .pokemon_name {
             font-size: 2rem;
             margin-top: 5px;
@@ -38,97 +32,104 @@
                 margin: auto;
             }
         }
+    
+    }
+}
 
-        .pokemon_types {
-            list-style: none;
-            padding: 0;
-            margin: 5px 0;
-            font-size: 1.6rem;
-            li {
-                display: inline-block;
-                padding: 5px 10px;
-                border-radius: 4px;
-                margin-right: 5px;
+.pokemon_id{
+    color: #818181;
+    font-style: italic;
+    font-size: 1.6rem;
+}
 
-                &.grass{
-                    background-color: $color-grass;
-                }
+.pokemon_types {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0;
+    font-size: 1.6rem;
+    li {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 4px;
+        margin-right: 5px;
 
-                &.fire{
-                    background-color: $color-fire;
-                    color: #fff;
-                }
-
-                &.poison{
-                    background: $color-poison;
-                }
-
-                &.water{
-                    background-color: $color-water;
-                    color: #fff;
-                }
-
-                &.ice{
-                    background-color: $color-ice;
-                }
-
-                &.normal{
-                    background-color: $color-normal;
-                }
-
-                &.bug{
-                    background-color: $color-bug;
-                }
-
-                &.ground{
-                    background: linear-gradient(125deg, #fcfc5a, #daa638);
-                }
-
-                &.electric{
-                    background-color: $color-electric;
-                }
-
-                &.fairy{
-                    background-color: $color-fairy;
-                }
-
-                &.psychic{
-                    background-color: $color-psychic;
-                }
-
-                &.rock{
-                    background-color: $color-rock;
-                }
-
-                &.steel{
-                    background-color: $color-steel;
-                }
-
-                &.flying{
-                    background: linear-gradient(125deg, #d8d8d8, #3c91d6);
-                }
-
-                &.dragon{
-                    background: linear-gradient(125deg, #fc7f94, #3c91d6);
-                    color: #fff;
-                }
-
-                &.fighting{
-                    background-color: #ffc547;
-                }
-
-                &.ghost{
-                    background-color: #6d016d;
-                    color: #fff;
-                }
-
-                &.dark{
-                    background-color: #646262;
-                    color: #fff;
-                }
-
-            }
+        &.grass{
+            background-color: $color-grass;
         }
+
+        &.fire{
+            background-color: $color-fire;
+            color: #fff;
+        }
+
+        &.poison{
+            background: $color-poison;
+        }
+
+        &.water{
+            background-color: $color-water;
+            color: #fff;
+        }
+
+        &.ice{
+            background-color: $color-ice;
+        }
+
+        &.normal{
+            background-color: $color-normal;
+        }
+
+        &.bug{
+            background-color: $color-bug;
+        }
+
+        &.ground{
+            background: linear-gradient(125deg, #fcfc5a, #daa638);
+        }
+
+        &.electric{
+            background-color: $color-electric;
+        }
+
+        &.fairy{
+            background-color: $color-fairy;
+        }
+
+        &.psychic{
+            background-color: $color-psychic;
+        }
+
+        &.rock{
+            background-color: $color-rock;
+        }
+
+        &.steel{
+            background-color: $color-steel;
+        }
+
+        &.flying{
+            background: linear-gradient(125deg, #d8d8d8, #3c91d6);
+        }
+
+        &.dragon{
+            background: linear-gradient(125deg, #fc7f94, #3c91d6);
+            color: #fff;
+        }
+
+        &.fighting{
+            background-color: #ffc547;
+        }
+
+        &.ghost{
+            background-color: #6d016d;
+            color: #fff;
+        }
+
+        &.dark{
+            background-color: #646262;
+            color: #fff;
+        }
+
     }
 }
 

@@ -22,7 +22,7 @@ export const PokemonCard = ( { id, name, image, types }: Pokemon ) => {
                     <span>{formatIdDisplay(id)}</span>
                 </div>
                 <div className="pokemon_image">
-                    <img src={image} alt="" />
+                    <img src={image} alt={`Imagem do pokemon ${name}`} />
                 </div>
                 <div className="pokemon_name">
                     {name} 
@@ -35,7 +35,7 @@ export const PokemonCard = ( { id, name, image, types }: Pokemon ) => {
             </div>
             {  
                 cardModalVisibility && 
-                <PokemonCardModal id={id} name={name}image={image} types={types} handleCardModalVisibility={handleCardModalVisibility} />
+                <PokemonCardModal id={id} name={name}image={image} types={types} formatIdDisplay={formatIdDisplay} handleCardModalVisibility={handleCardModalVisibility} />
             }
         </>
     );

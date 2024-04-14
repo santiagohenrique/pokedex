@@ -26,29 +26,45 @@
         position: absolute;
         background-color: transparent;
         cursor: pointer;
-        font-size: 2.2rem;
-        top: 10px;
-        right: 10px;
+        font-size: 3rem;
+        top: 15px;
+        right: 15px;
     }
+}
+
+.pokemon_modal{
+    
+
+    .modal_container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pokemon_image{
+        display: flex;
+        img{
+            width: 50%;
+            margin: auto;
+        }
+    }
+
 }
 
 @media (min-width: 768px){
     .modal_container{
         max-width: 65%;
-        max-height: 65%;
     }
 }
 
 @media (min-width: 992px){
     .modal_container{
         max-width: 50%;
-        max-height: 50%;
     }
 }
 
 @media (min-width: 1200px){
     .modal_container{
         max-width: 35%;
-        max-height: 35%;
     }
 }
