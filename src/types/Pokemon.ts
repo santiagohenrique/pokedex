@@ -3,6 +3,7 @@ export interface Pokemon {
     name: string,
     image: string,
     types: string[],
+    stats: Record<string, number>
 }
 
 export interface PokemonAPI extends Pokemon {
@@ -12,7 +13,13 @@ export interface PokemonAPI extends Pokemon {
 export interface PokemonDetails {
     types: {
         type: {
-        name: string;
+            name: string;
         };
     }[];
+    stats: {
+        stat: {
+            name: string
+        }
+        base_stat: number
+    }[]
 }

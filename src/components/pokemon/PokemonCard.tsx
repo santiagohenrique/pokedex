@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Pokemon } from "../../types/Pokemon";
 import { PokemonCardModal } from "./PokemonCardModal";
 
-export const PokemonCard = ( { id, name, image, types }: Pokemon ) => {
+export const PokemonCard = ( { id, name, image, types, stats }: Pokemon ) => {
 
     const[cardModalVisibility, setCardModalVisibility] = useState(false)
 
@@ -35,7 +35,15 @@ export const PokemonCard = ( { id, name, image, types }: Pokemon ) => {
             </div>
             {  
                 cardModalVisibility && 
-                <PokemonCardModal id={id} name={name}image={image} types={types} formatIdDisplay={formatIdDisplay} handleCardModalVisibility={handleCardModalVisibility} />
+                <PokemonCardModal 
+                    id={id} 
+                    name={name}
+                    image={image} 
+                    types={types} 
+                    stats={stats} 
+                    formatIdDisplay={formatIdDisplay} 
+                    handleCardModalVisibility={handleCardModalVisibility} 
+                />
             }
         </>
     );
