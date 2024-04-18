@@ -1,0 +1,34 @@
+@mixin filter_options($display, $gap){
+    display: $display;
+    flex-direction: column;
+    gap: $gap;
+}
+
+.filter_container{
+    margin: 3rem 0 1rem;
+    font-size: 1.6rem;
+
+    .input_container{
+        @include filter_options(flex, 0.5rem);
+        margin-bottom: 1rem;
+
+        .search_bar{
+            font-size: 1.3rem;
+            padding: 0.1rem 0.3rem;
+        }
+    }
+
+    .select_container{
+        @include filter_options(flex, 0.5rem);
+    }
+}
+
+.btn_apply{
+    display: block;
+    background-color: #4caf50;
+    border-radius: 0.5rem;
+    color: #fff;
+    cursor: pointer;
+    margin: 0 auto;
+    padding: 0.5rem 2rem;
+}

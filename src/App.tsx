@@ -9,12 +9,13 @@ import { PageButtons } from './components/PageButtons';
 
 function App() {
 
-  const [pokemonUrl, setPokemonUrl] = useState('https://pokeapi.co/api/v2/pokemon?offset=0&limit=24');
+  const [pokemonUrl, setPokemonUrl] = useState(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=24`);
   const [modalVisibility, setModalVisibility] = useState(false);
+  const [pokemonFilteredName, setPokemonFilteredName] = useState<string>('')
 
   const { data: pokemonData, isLoading, isError } = useQuery({
-    queryKey: ["pokemons", pokemonUrl],
-    queryFn: () => fetchPokemonList(pokemonUrl)
+    queryKey: ["pokemons", pokemonUrl, pokemonFilteredName],
+    queryFn: () => fetchPokemonList(pokemonUrl, pokemonFilteredName)
   });
 
   const handlePrevious = () => {
@@ -55,6 +56,7 @@ function App() {
       {modalVisibility &&
         <ModalFilter 
           handleModalVisibility={handleModalVisibility} 
+          setPokemonFilteredName={setPokemonFilteredName}
         />
       }
     </>

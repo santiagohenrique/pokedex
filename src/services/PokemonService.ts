@@ -3,24 +3,44 @@ import { PokemonDetails } from "../types/Pokemon";
 import { PokemonAPI } from "../types/Pokemon";
 
 export interface APIData{
-    previous: string,
-    next: string,
+    previous: string | null,
+    next: string | null,
     pokemonList: (PokemonAPI)[];
 }
 
-export async function fetchPokemonList(url: string): Promise<APIData> {
+export async function fetchPokemonList(url: string, pokemonFilteredName: string): Promise<APIData> {
     await new Promise(resolve => setTimeout(resolve, 1500));
-    const response = await axios.get(url);
+    let response = await axios.get(url);
     let modifiedResults: PokemonAPI[] = [];
-
-    modifiedResults = await Promise.all(response.data.results.map(async (pokemon: PokemonAPI) => {
-        return fetchPokemonDetails(pokemon);
-    }));
-
-    return {
-        previous: response.data.previous,
-        next: response.data.next,
-        pokemonList: modifiedResults
+    const filterPokemonListByName: PokemonAPI[] = [];
+    let nextUrl: string | null = url;
+    if (pokemonFilteredName) {
+        while (nextUrl) {
+            response = await axios.get(nextUrl);
+            const pokemonList: PokemonAPI[] = response.data.results;
+            filterPokemonListByName.push(...pokemonList.filter((pokemon: PokemonAPI) => {
+                return pokemon.name.toLowerCase().includes(pokemonFilteredName);
+            }));
+            nextUrl = response.data.next;
+        }
+        modifiedResults = await Promise.all(filterPokemonListByName.map(async (pokemon: PokemonAPI) => {
+            return fetchPokemonDetails(pokemon);
+        }));
+        return {
+            previous: null,
+            next: null,
+            pokemonList: modifiedResults
+        };
+    } else {
+        response = await axios.get(url);
+        modifiedResults = await Promise.all(response.data.results.map(async (pokemon: PokemonAPI) => {
+            return fetchPokemonDetails(pokemon);
+        }));
+        return {
+            previous: response.data.previous,
+            next: response.data.next,
+            pokemonList: modifiedResults
+        };
     }
 }
 
