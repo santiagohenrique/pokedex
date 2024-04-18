@@ -19,7 +19,7 @@ export async function fetchPokemonList(url: string, pokemonFilteredName: string)
             response = await axios.get(nextUrl);
             const pokemonList: PokemonAPI[] = response.data.results;
             filterPokemonListByName.push(...pokemonList.filter((pokemon: PokemonAPI) => {
-                return pokemon.name.toLowerCase().includes(pokemonFilteredName);
+                return pokemon.name.includes(pokemonFilteredName.toLowerCase());
             }));
             nextUrl = response.data.next;
         }
