@@ -7,6 +7,10 @@ interface PageButtonsProps{
 }
 
 export const PageButtons = ( { handlePrevious, handleNext, pokemonData }:PageButtonsProps ) => {
+
+
+    console.log(pokemonData?.next)
+
     return(
         <div className="buttons_container">
             {

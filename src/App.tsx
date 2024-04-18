@@ -3,7 +3,6 @@ import './assets/scss/styles.scss'
 import PokemonList from "./components/pokemon/PokemonList"
 import { fetchPokemonList } from './services/PokemonService';
 import { useState } from 'react';
-
 import { ModalFilter } from './components/ModalFilter';
 import { Header } from './components/Header';
 import { PageButtons } from './components/PageButtons';
@@ -11,7 +10,7 @@ import { PageButtons } from './components/PageButtons';
 function App() {
 
   const [pokemonUrl, setPokemonUrl] = useState('https://pokeapi.co/api/v2/pokemon?offset=0&limit=24');
-  const [modalVisibility, setModalVisibility] = useState(false)
+  const [modalVisibility, setModalVisibility] = useState(false);
 
   const { data: pokemonData, isLoading, isError } = useQuery({
     queryKey: ["pokemons", pokemonUrl],
@@ -54,7 +53,9 @@ function App() {
         <PageButtons handlePrevious={handlePrevious} handleNext={handleNext} pokemonData={pokemonData}  />
       </div>
       {modalVisibility &&
-        <ModalFilter handleModalVisibility={handleModalVisibility} />
+        <ModalFilter 
+          handleModalVisibility={handleModalVisibility} 
+        />
       }
     </>
   )

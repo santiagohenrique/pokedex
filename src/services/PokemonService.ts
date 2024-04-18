@@ -5,14 +5,18 @@ import { PokemonAPI } from "../types/Pokemon";
 export interface APIData{
     previous: string,
     next: string,
-    pokemonList: PokemonAPI[]
+    pokemonList: (PokemonAPI)[];
 }
 
 export async function fetchPokemonList(url: string): Promise<APIData> {
+    await new Promise(resolve => setTimeout(resolve, 1500));
     const response = await axios.get(url);
-    const modifiedResults = await Promise.all(response.data.results.map(async (pokemon: PokemonAPI) => {
+    let modifiedResults: PokemonAPI[] = [];
+
+    modifiedResults = await Promise.all(response.data.results.map(async (pokemon: PokemonAPI) => {
         return fetchPokemonDetails(pokemon);
     }));
+
     return {
         previous: response.data.previous,
         next: response.data.next,
@@ -22,9 +26,9 @@ export async function fetchPokemonList(url: string): Promise<APIData> {
 
 async function fetchPokemonDetails(pokemon: PokemonAPI): Promise<PokemonAPI> {
     const response = await axios.get<PokemonDetails>(pokemon.url);
+    const types = response.data.types.map(type => type.type.name);
     const id = Number.parseInt(extractPokemonId(pokemon.url))
     const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-    const types = response.data.types.map(type => type.type.name);
     const stats: Record<string, number> = {};
         response.data.stats.forEach(stat => {
             stats[stat.stat.name] = stat.base_stat;

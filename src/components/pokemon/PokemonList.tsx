@@ -5,11 +5,11 @@ interface PokemonListProps{
     pokemonList: PokemonAPI[] | undefined
 }
 
-function PokemonList( { pokemonList }:PokemonListProps ) {
+function PokemonList( { pokemonList }: PokemonListProps ) {
 
     return (
         <div className="pokemon_list">
-            {pokemonList?.map((pokemon: Pokemon) => (
+            {pokemonList && pokemonList.length > 0 ? pokemonList.map((pokemon: Pokemon) => (
                 <PokemonCard 
                     id={pokemon.id} 
                     name={ pokemon.name } 
@@ -18,7 +18,7 @@ function PokemonList( { pokemonList }:PokemonListProps ) {
                     key={pokemon.name} 
                     stats={pokemon.stats}  
                 />
-            ))}
+            )) : 'Nenhum resultado foi encontrado!'}
         </div>
     );
 }

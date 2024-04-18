@@ -51,7 +51,10 @@
     }
 
     .pokemon_stats{
+
         ul{
+            height: 130px;
+            overflow-y: scroll;
             display: flex;
             flex-direction: column;
             gap: 1rem;
@@ -76,7 +79,6 @@
             }
         }
     }
-
 }
 
 @media (min-width: 768px){
