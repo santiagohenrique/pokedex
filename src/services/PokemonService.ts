@@ -8,40 +8,49 @@ export interface APIData{
     pokemonList: (PokemonAPI)[];
 }
 
-export async function fetchPokemonList(url: string, pokemonFilteredName: string): Promise<APIData> {
+export async function fetchPokemonList(url: string): Promise<APIData> {
     await new Promise(resolve => setTimeout(resolve, 1500));
-    let response = await axios.get(url);
-    let modifiedResults: PokemonAPI[] = [];
-    const filterPokemonListByName: PokemonAPI[] = [];
-    let nextUrl: string | null = url;
-    if (pokemonFilteredName) {
-        while (nextUrl) {
-            response = await axios.get(nextUrl);
-            const pokemonList: PokemonAPI[] = response.data.results;
-            filterPokemonListByName.push(...pokemonList.filter((pokemon: PokemonAPI) => {
-                return pokemon.name.includes(pokemonFilteredName.toLowerCase());
-            }));
-            nextUrl = response.data.next;
-        }
-        modifiedResults = await Promise.all(filterPokemonListByName.map(async (pokemon: PokemonAPI) => {
-            return fetchPokemonDetails(pokemon);
-        }));
-        return {
-            previous: null,
-            next: null,
-            pokemonList: modifiedResults
-        };
-    } else {
-        response = await axios.get(url);
+    try{
+        const response = await axios.get(url);
+        let modifiedResults: PokemonAPI[] = [];
         modifiedResults = await Promise.all(response.data.results.map(async (pokemon: PokemonAPI) => {
-            return fetchPokemonDetails(pokemon);
+            return await fetchPokemonDetails(pokemon);
         }));
         return {
             previous: response.data.previous,
             next: response.data.next,
             pokemonList: modifiedResults
         };
+    } catch (error) {
+        console.error('Erro ao buscar lista de Pokémon:', error);
+        throw error;
     }
+}
+
+export async function fetchAllPokemons(url: string): Promise<APIData>{
+    try{
+        let response = await axios.get(url);
+        let modifiedResults: PokemonAPI[] = [];
+        let pokemonList: PokemonAPI[] = [];
+        let nextUrl: string | null = url;
+        while (nextUrl) {
+            response = await axios.get(nextUrl);
+            pokemonList = [...pokemonList, response.data.results];
+            nextUrl = response.data.next;
+        }
+        modifiedResults = await Promise.all(pokemonList.map(async (pokemon: PokemonAPI) => {
+            return await fetchPokemonDetails(pokemon);
+        }));
+        return{
+            previous: null,
+            next: null,
+            pokemonList: modifiedResults
+        }
+    } catch (error){
+        console.error('Erro ao buscar todos os pokémons:', error);
+        throw error;
+    }
+    
 }
 
 async function fetchPokemonDetails(pokemon: PokemonAPI): Promise<PokemonAPI> {

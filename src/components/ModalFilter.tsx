@@ -7,7 +7,7 @@ interface ModalFilterProps{
 
 export const ModalFilter = ( { handleModalVisibility, setPokemonFilteredName }:ModalFilterProps ) => {
 
-    const [name, setName] = useState('');
+    const [name, setName] = useState<string>('');
 
     const applyFilter = () => {
         setPokemonFilteredName(name)
