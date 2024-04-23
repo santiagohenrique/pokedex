@@ -11,15 +11,15 @@ function App() {
 
   const [pokemonUrl, setPokemonUrl] = useState(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=24`);
   const [modalVisibility, setModalVisibility] = useState(false);
-  const [pokemonFilteredName, setPokemonFilteredName] = useState<string>('')
+  const [pokemonFilteredName, setPokemonFilteredName] = useState<string>('bul')
 
   const { data: pokemonData, isLoading, isError } = useQuery({
-    queryKey: ["pokemons", pokemonUrl],
+    queryKey: ["standardPokemonList", pokemonUrl],
     queryFn: () => fetchPokemonList(pokemonUrl)
   });
 
   const { data: pokemonDataCached } = useQuery({
-    queryKey: ["pokemons", pokemonUrl],
+    queryKey: ["allPokemonsList", pokemonUrl],
     queryFn: () => fetchAllPokemons(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=24`)
   });
 
