@@ -16,7 +16,8 @@ export const ModalFilter = ( { handleModalVisibility, setPokemonFilteredName, se
                     'ghost', 'dragon', 'dark', 'steel', 'fairy' ]
 
     const applyFilter = () => {
-        setPokemonFilteredName(name)
+        const filteredName = name.replace(/\s/g, '').toLowerCase();
+        setPokemonFilteredName(filteredName)
         setPokemonFilteredType(type)
     }
 
