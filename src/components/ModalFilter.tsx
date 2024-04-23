@@ -37,7 +37,7 @@ export const ModalFilter = ( { handleModalVisibility, setPokemonFilteredName, se
                         <select value={type} onChange={(e) => setType(e.target.value)}>
                             <option value="">Todos os tipos</option>
                             <option value="fire">Fire</option>
-                            <option value="fire">Grass</option>
+                            <option value="grass">Grass</option>
                             <option value="water">Water</option>
                             <option value="electric">Electric</option>
                             <option value="normal">Normal</option>
