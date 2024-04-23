@@ -9,7 +9,11 @@ interface ModalFilterProps{
 export const ModalFilter = ( { handleModalVisibility, setPokemonFilteredName, setPokemonFilteredType }:ModalFilterProps ) => {
 
     const [name, setName] = useState<string>('');
-    const [type, setType] = useState<string>('')
+    const [type, setType] = useState<string>('');
+    const types = [ 'fire', 'grass', 'water', 'electric', 
+                    'normal', 'ice', 'fighting', 'poison', 'ground', 
+                    'flying', 'psychic', 'bug', 'rock',
+                    'ghost', 'dragon', 'dark', 'steel', 'fairy' ]
 
     const applyFilter = () => {
         setPokemonFilteredName(name)
@@ -36,24 +40,9 @@ export const ModalFilter = ( { handleModalVisibility, setPokemonFilteredName, se
                         <span>Selecione um tipo</span>
                         <select value={type} onChange={(e) => setType(e.target.value)}>
                             <option value="">Todos os tipos</option>
-                            <option value="fire">Fire</option>
-                            <option value="grass">Grass</option>
-                            <option value="water">Water</option>
-                            <option value="electric">Electric</option>
-                            <option value="normal">Normal</option>
-                            <option value="ice">Ice</option>
-                            <option value="fighting">Fighting</option>
-                            <option value="poison">Poison</option>
-                            <option value="ground">Ground</option>
-                            <option value="flying">Flying</option>
-                            <option value="psychic">Psychic</option>
-                            <option value="bug">Bug</option>
-                            <option value="rock">Rock</option>
-                            <option value="ghost">Ghost</option>
-                            <option value="dragon">Dragon</option>
-                            <option value="dark">Dark</option>
-                            <option value="steel">Steel</option>
-                            <option value="fairy">Fairy</option>
+                            {types.map((type) => (
+                                <option key={type} value={type}>{type}</option>
+                            ))}
                         </select>
                     </div>
                 </div>

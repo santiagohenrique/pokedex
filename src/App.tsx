@@ -68,6 +68,11 @@ function App() {
     setModalVisibility(!modalVisibility)
   }
 
+  const handleFilter = () => {
+    setPokemonFilteredName('')
+    setPokemonFilteredType('')
+  }
+
   if (isLoading){
     return (
       <div className="loading_container">
@@ -84,6 +89,7 @@ function App() {
     <>
       <Header handleModalVisibility={handleModalVisibility} />
       <div className="container">
+        {filterActive && <button onClick={handleFilter}>Remover filtro</button>}
         <PokemonList pokemonList={filterActive === true? pokemonFilteredList : pokemonData?.pokemonList} />
         <PageButtons handlePrevious={handlePrevious} handleNext={handleNext} pokemonData={filterActive === true? pokemonDataCached : pokemonData}  />
       </div>
