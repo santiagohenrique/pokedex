@@ -25,6 +25,8 @@
             gap: 1rem;
             font-size: 1.7rem;
             list-style: none;
+            scrollbar-width: thin; /* Largura fina para o scroll padrão do navegador */
+            scrollbar-color: #009900 #f0f0f0;
             li{
                 .stat_bar_container {
                     width: 100%;
@@ -43,6 +45,7 @@
                 margin-bottom: 0.5rem;                
             }
         }
+
     }
 }
 
