@@ -9,7 +9,7 @@ export interface APIData{
 }
 
 export async function fetchPokemonList(url: string): Promise<APIData> {
-    await new Promise(resolve => setTimeout(resolve, 2500));
+    await new Promise(resolve => setTimeout(resolve, 2300));
     try{
         const response = await axios.get(url);
         let modifiedResults: PokemonAPI[] = [];
@@ -34,8 +34,10 @@ export async function fetchAllPokemons(url: string): Promise<APIData>{
         let pokemonList: PokemonAPI[] = [];
         let nextUrl: string | null = url;
         while (nextUrl) {
+            await new Promise(resolve => setTimeout(resolve, 100));
             response = await axios.get(nextUrl);
             pokemonList = [...pokemonList, ...response.data.results];
+            console.log(pokemonList)
             nextUrl = response.data.next;
         }
         modifiedResults = await Promise.all(pokemonList.map(async (pokemon: PokemonAPI) => {
