@@ -7,13 +7,16 @@ import { ModalFilter } from './components/ModalFilter';
 import { Header } from './components/Header';
 import { PageButtons } from './components/PageButtons';
 import { PokemonAPI } from './types/Pokemon';
+import { Loader } from './components/Loader';
 
 function App() {
 
   const [pokemonUrl, setPokemonUrl] = useState(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=24`);
   const [modalVisibility, setModalVisibility] = useState(false);
-  const [pokemonFilteredName, setPokemonFilteredName] = useState<string>('')
-  const [pokemonFilteredType, setPokemonFilteredType] = useState<string>('')
+  const [pokemonFilter, setPokemonFilter] = useState({
+    name: '',
+    type: ''
+  })
   const [pokemonFilteredList, setPokemonFilteredList] = useState<PokemonAPI[]>([])
   const [filterActive, setFilterActive] = useState<boolean>(false)
 
@@ -31,26 +34,19 @@ function App() {
 
   useEffect(() => {
     console.time("filter")
-    const isActive = !!pokemonFilteredName || !!pokemonFilteredType;
+    const isActive = !!pokemonFilter.name || !!pokemonFilter.type;
     setFilterActive(isActive);
     if(isActive){
-      let filteredPokemons;
-      if (pokemonFilteredType) {
-      filteredPokemons = pokemonDataCached?.pokemonList.filter((pokemon) =>
-        pokemon.name.includes(pokemonFilteredName) &&
-        pokemon.types.includes(pokemonFilteredType)
+      const filteredPokemons = pokemonDataCached?.pokemonList.filter((pokemon) =>
+        (!pokemonFilter.name || pokemon.name.includes(pokemonFilter.name)) &&
+        (!pokemonFilter.type || pokemon.types.includes(pokemonFilter.type))
       );
-      } else {
-        filteredPokemons = pokemonDataCached?.pokemonList.filter((pokemon) =>
-          pokemon.name.includes(pokemonFilteredName)
-        );
-      }
       setPokemonFilteredList(filteredPokemons || []);
       console.log(filteredPokemons)
     }
     console.log(filterActive)
     console.timeEnd("filter")
-  }, [pokemonFilteredName, pokemonFilteredType, pokemonDataCached, filterActive])
+  }, [pokemonFilter.name, pokemonFilter.type, pokemonDataCached, filterActive])
 
   const handlePrevious = () => {
     if (pokemonData && pokemonData.previous) {
@@ -69,17 +65,15 @@ function App() {
   }
 
   const handleFilter = () => {
-    setPokemonFilteredName('')
-    setPokemonFilteredType('')
+    setPokemonFilter({
+      name: '',
+      type: ''
+    })
   }
 
   if (isLoading){
     return (
-      <div className="loading_container">
-        <div className="mainball">
-          <div className="pokebutton"></div>
-        </div>
-      </div>
+      <Loader />
     )
   } 
 
@@ -90,14 +84,13 @@ function App() {
       <Header handleModalVisibility={handleModalVisibility} />
       <div className="container">
         {filterActive && <button onClick={handleFilter}>Remover filtro</button>}
-        <PokemonList pokemonList={filterActive === true? pokemonFilteredList : pokemonData?.pokemonList} />
-        <PageButtons handlePrevious={handlePrevious} handleNext={handleNext} pokemonData={filterActive === true? pokemonDataCached : pokemonData}  />
+        <PokemonList pokemonList={filterActive ? pokemonFilteredList : pokemonData?.pokemonList} />
+        <PageButtons handlePrevious={handlePrevious} handleNext={handleNext} pokemonData={filterActive ? pokemonDataCached : pokemonData}  />
       </div>
       {modalVisibility &&
         <ModalFilter 
           handleModalVisibility={handleModalVisibility} 
-          setPokemonFilteredName={setPokemonFilteredName}
-          setPokemonFilteredType={setPokemonFilteredType}
+          setPokemonFilter={setPokemonFilter}
         />
       }
     </>

@@ -2,11 +2,10 @@ import { useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 interface ModalFilterProps{
     handleModalVisibility: () => void;
-    setPokemonFilteredName: Dispatch<SetStateAction<string>>
-    setPokemonFilteredType: Dispatch<SetStateAction<string>>
+    setPokemonFilter: Dispatch<SetStateAction<{ name: string; type: string; }>>;
 }
 
-export const ModalFilter = ( { handleModalVisibility, setPokemonFilteredName, setPokemonFilteredType }:ModalFilterProps ) => {
+export const ModalFilter = ( { handleModalVisibility, setPokemonFilter}:ModalFilterProps ) => {
 
     const [name, setName] = useState<string>('');
     const [type, setType] = useState<string>('');
@@ -17,8 +16,10 @@ export const ModalFilter = ( { handleModalVisibility, setPokemonFilteredName, se
 
     const applyFilter = () => {
         const filteredName = name.replace(/\s/g, '').toLowerCase();
-        setPokemonFilteredName(filteredName)
-        setPokemonFilteredType(type)
+        setPokemonFilter({
+            name: filteredName,
+            type: type
+        })
     }
 
     return(
