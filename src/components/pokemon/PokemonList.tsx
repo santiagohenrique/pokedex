@@ -23,7 +23,13 @@ function PokemonList( { pokemonList }: PokemonListProps ) {
                     ))}
                 </div>
             ) : (
-                <div className="empty_list_message">Nenhum resultado foi encontrado!</div>
+                <div className="empty_list_message">
+                    <p className="empty_list_title"> Nenhum resultado foi encontrado! </p>
+                    <p>Sugestão:</p>
+                    <ul className="empty_list_suggetions_list">
+                        <li>Verifique os filtros preenchidos</li>
+                    </ul>
+                </div>
             )}
         </>
     );

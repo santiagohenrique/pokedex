@@ -1,7 +1,7 @@
 import axios from "axios";
 import { PokemonDetails } from "../types/Pokemon";
 import { PokemonAPI } from "../types/Pokemon";
-
+import memoizeOne from 'memoize-one';
 export interface APIData{
     previous: string | null,
     next: string | null,
@@ -55,15 +55,15 @@ export async function fetchAllPokemons(url: string): Promise<APIData>{
     
 }
 
-async function fetchPokemonDetails(pokemon: PokemonAPI): Promise<PokemonAPI> {
+const fetchPokemonDetails = memoizeOne(async (pokemon: PokemonAPI): Promise<PokemonAPI> => {
     const response = await axios.get<PokemonDetails>(pokemon.url);
     const types = response.data.types.map(type => type.type.name);
     const id = Number.parseInt(extractPokemonId(pokemon.url))
     const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
     const stats: Record<string, number> = {};
-        response.data.stats.forEach(stat => {
-            stats[stat.stat.name] = stat.base_stat;
-        });
+    response.data.stats.forEach(stat => {
+        stats[stat.stat.name] = stat.base_stat;
+    });
     return {
         ...pokemon,
         id: id,
@@ -71,7 +71,7 @@ async function fetchPokemonDetails(pokemon: PokemonAPI): Promise<PokemonAPI> {
         types: types,
         stats: stats
     };
-}
+});
 
 function extractPokemonId(url: string): string {
     const parts = url.split('/');

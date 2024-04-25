@@ -1,4 +1,5 @@
 import { Pokemon } from "../../types/Pokemon";
+import { Button } from "../Button";
 
 interface PokemonCardProps extends Pokemon{
     handleCardModalVisibility: () => void
@@ -35,7 +36,7 @@ export const PokemonCardModal = ( { id, name, image, types, stats, handleCardMod
                         ))}
                     </ul>
                 </div>
-                <button className="btn_close" onClick={handleCardModalVisibility}>&times;</button>
+                <Button className="btn_close" onClick={handleCardModalVisibility} text="&times;" />
             </div>
         </div>
     );

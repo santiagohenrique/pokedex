@@ -1,4 +1,5 @@
 import { APIData } from "../services/PokemonService";
+import { Button } from "./Button";
 
 interface PageButtonsProps{
     handlePrevious: () => void,
@@ -12,15 +13,11 @@ export const PageButtons = ( { handlePrevious, handleNext, pokemonData }:PageBut
         <div className="buttons_container">
             {
                 pokemonData?.previous &&
-                <button className="btn_previous" onClick={handlePrevious}>
-                &lt; Anterior
-                </button>
+                <Button className="btn_previous" onClick={handlePrevious} text="&lt; Anterior" />
             }
             {
                 pokemonData?.next &&
-                <button className="btn_next" onClick={handleNext}>
-                Próximo &gt;
-                </button>
+                <Button className="btn_next" onClick={handleNext} text="Próximo &gt;" />
             }
         </div>
     );

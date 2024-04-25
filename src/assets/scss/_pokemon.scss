@@ -10,6 +10,7 @@
     display: grid;
     @include grid-columns(2);
     gap: 1rem;
+    margin-top: 1.5rem;
     margin-bottom: 1rem;
 
     .pokemon_card {
@@ -134,8 +135,28 @@
 }
 
 .empty_list_message{
-    border: 1px solid black;
-    font-size: 2rem;
+    position: absolute;
+    border: 1px solid #ff3b3b;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.8rem;
+    gap: 0.8rem;
+    left: 50%;
+    margin-top: 1rem;
+    transform: translate(-50%);
+    padding: 1rem;
+    .empty_list_title{
+        color: #ff3b3b;
+        text-align: center;
+    }
+
+    .empty_list_suggetions_list{
+        list-style-position: inside;
+        font-size: 1.6rem;
+    }
+
+    width: 80%;
 }
 
 @media (min-width: 768px){

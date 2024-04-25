@@ -1,4 +1,5 @@
 import pokemonLogo from '../assets/svgs/pokemon_logo.svg'
+import { Button } from './Button';
 
 interface HeaderProps{
     handleModalVisibility: () => void;
@@ -11,9 +12,7 @@ export const Header = ( { handleModalVisibility }: HeaderProps ) => {
             <div className="logo_container">
                 <img src={pokemonLogo} alt="" />
             </div>
-            <button onClick={ handleModalVisibility } className="btn_filter">
-                Busca avançada
-            </button>
+            <Button className="btn_filter" onClick={handleModalVisibility} text="Busca avançada" />
         </div>
         </header>
     );
