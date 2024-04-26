@@ -14,7 +14,7 @@ export const PokemonCardModal = ( { id, name, image, types, stats, handleCardMod
                     <span>{formatIdDisplay(id)}</span>
                 </div>
                 <div className="pokemon_image">
-                    <img src={image} alt="" />
+                    <img src={image} alt={`Imagem do pokemon ${name}`} />
                 </div>
                 <div className="pokemon_name">
                     {name} 

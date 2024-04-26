@@ -9,10 +9,14 @@ import { PageButtons } from './components/PageButtons';
 import { PokemonAPI } from './types/Pokemon';
 import { Loader } from './components/Loader';
 import { Button } from './components/Button';
+import usePagination from './hooks/usePagination';
 
 function App() {
 
-  const [pokemonUrl, setPokemonUrl] = useState(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=24`);
+  const { url: pokemonUrl, goToNextPage, goToPreviousPage } = usePagination(
+    'https://pokeapi.co/api/v2/pokemon?offset=0&limit=24'
+  );
+
   const [modalVisibility, setModalVisibility] = useState(false);
   const [pokemonFilter, setPokemonFilter] = useState({
     name: '',
@@ -21,7 +25,7 @@ function App() {
   const [pokemonFilteredList, setPokemonFilteredList] = useState<PokemonAPI[]>([])
   const [filterActive, setFilterActive] = useState<boolean>(false)
 
-  const { data: pokemonData, isLoading, isError } = useQuery({
+  const { data: pokemonData, isLoading: isLoadingPokemonList, isError } = useQuery({
     queryKey: ["standardPokemonList", pokemonUrl],
     queryFn: () => fetchPokemonList(pokemonUrl),
   });
@@ -43,7 +47,6 @@ function App() {
         (!pokemonFilter.type || pokemon.types.includes(pokemonFilter.type))
       );
       setPokemonFilteredList(filteredPokemons || []);
-      console.log(filteredPokemons)
     }
     console.log(filterActive)
     console.timeEnd("filter")
@@ -51,13 +54,13 @@ function App() {
 
   const handlePrevious = () => {
     if (pokemonData && pokemonData.previous) {
-      setPokemonUrl(pokemonData.previous);
+      goToPreviousPage(pokemonData.previous);
     }
   };
 
   const handleNext = () => {
     if (pokemonData && pokemonData.next) {
-      setPokemonUrl(pokemonData.next);
+      goToNextPage(pokemonData.next);
     }
   };
 
@@ -72,7 +75,7 @@ function App() {
     })
   }
 
-  if (isLoading){
+  if (isLoadingPokemonList){
     return (
       <Loader />
     )
@@ -84,7 +87,6 @@ function App() {
     <>
       <Header handleModalVisibility={handleModalVisibility} />
       <div className="container">
-        
         {filterActive && <Button className="btn_filter" onClick={handleFilter} text="&times; Remover filtro" />}
         <PokemonList pokemonList={filterActive ? pokemonFilteredList : pokemonData?.pokemonList} />
         <PageButtons handlePrevious={handlePrevious} handleNext={handleNext} pokemonData={filterActive ? pokemonDataCached : pokemonData}  />

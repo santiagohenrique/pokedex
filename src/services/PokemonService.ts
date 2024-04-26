@@ -9,16 +9,17 @@ export interface APIData{
 }
 
 export async function fetchPokemonList(url: string): Promise<APIData> {
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 1500));
     try{
         const response = await axios.get(url);
+        const { results, previous, next } = response.data
         let modifiedResults: PokemonAPI[] = [];
-        modifiedResults = await Promise.all(response.data.results.map(async (pokemon: PokemonAPI) => {
+        modifiedResults = await Promise.all(results.map(async (pokemon: PokemonAPI) => {
             return await fetchPokemonDetails(pokemon);
         }));
         return {
-            previous: response.data.previous,
-            next: response.data.next,
+            previous: previous,
+            next: next,
             pokemonList: modifiedResults
         };
     } catch (error) {
@@ -34,11 +35,12 @@ export async function fetchAllPokemons(url: string): Promise<APIData>{
         let pokemonList: PokemonAPI[] = [];
         let nextUrl: string | null = url;
         while (nextUrl) {
-            await new Promise(resolve => setTimeout(resolve, 10));
+            await new Promise(resolve => setTimeout(resolve, 50));
             response = await axios.get(nextUrl);
-            pokemonList = [...pokemonList, ...response.data.results];
+            const { results, next } = response.data
+            pokemonList = [...pokemonList, ...results];
             console.log(pokemonList)
-            nextUrl = response.data.next;
+            nextUrl = next;
         }
         modifiedResults = await Promise.all(pokemonList.map(async (pokemon: PokemonAPI) => {
             return await fetchPokemonDetails(pokemon);
