@@ -4,7 +4,11 @@
 - Este projeto é uma aplicação web desenvolvida em React.js e TypeScript que oferece uma experiência interativa para explorar e descobrir informações sobre Pokémon. Utilizando a popular PokéAPI como fonte de dados, a aplicação permite aos usuários visualizar uma extensa lista de Pokémon e aplicar filtros para encontrar Pokémon específicos com facilidade.
 
 ## Deploy
-https://santiagohenrique.github.io/pokedex/
+- Visitar o site: https://santiagohenrique.github.io/pokedex/
+- Layout mobile
+<div>
+  <img src="https://github.com/santiagohenrique/jokenpo_react/assets/88721828/2ac53423-2571-4716-ad7f-83450fd3c06b" width="400px" />
+</div>
 
 ## Características
 - Visualização de uma lista de Pokémon.
