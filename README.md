@@ -5,10 +5,15 @@
 
 ## Deploy
 - Visitar o site: https://santiagohenrique.github.io/pokedex/
-- Layout mobile
+- Layout desktop
 <div>
-  <img src="https://github.com/santiagohenrique/jokenpo_react/assets/88721828/2ac53423-2571-4716-ad7f-83450fd3c06b" width="400px" />
+  <img src="https://github.com/santiagohenrique/pokedex/assets/88721828/fde96faf-8491-484f-8061-a2600d36a5a4" width="550px" />
 </div>
+- Layout para dispositivos menores
+<div>
+  <img src="https://github.com/santiagohenrique/pokedex/assets/88721828/79e9dac6-f2d9-4905-8ede-69e988f20d6e" width="250px" />
+</div>
+
 
 ## Características
 - Visualização de uma lista de Pokémon.
